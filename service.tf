@@ -1,5 +1,5 @@
 module "ecs_service" {
-  source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/service?ref=v6.4.0"
+  source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/service?ref=v9.1.0"
   name   = "goobi"
 
   cluster_id = "${module.ecs_cluster.cluster_name}"
@@ -45,4 +45,5 @@ module "ecs_service" {
   client_error_alarm_topic_arn = "${module.alb_client_error_alarm.arn}"
 
   log_group_name_prefix = "goobi"
+  log_retention_in_days = 60
 }
