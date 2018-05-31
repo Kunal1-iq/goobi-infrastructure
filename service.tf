@@ -37,7 +37,7 @@ module "ecs_service" {
   }
 
   https_domain = "${var.workflow_domain_name}"
-  path_pattern = "/*"
+  path_pattern = "/goobi/*"
 
   env_vars_length = 10
 
