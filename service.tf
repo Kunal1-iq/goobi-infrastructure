@@ -24,7 +24,9 @@ module "ecs_service" {
   env_vars = {
     HTTPD_PORT    = "80"
     APP_PATH      = "goobi"
-    APP_PORT      = "8080"
+    APP_CONTAINER = "goobi"
+    ITM_PATH      = "itm"
+    ITM_CONTAINER = "itm"
     SERVERNAME    = "${var.workflow_domain_name}"
     HTTPS_DOMAIN  = "${var.workflow_domain_name}"
     DB_SERVER     = "${module.goobi_rds_cluster.host}"
@@ -39,7 +41,7 @@ module "ecs_service" {
   https_domain = "${var.workflow_domain_name}"
   path_pattern = "/*"
 
-  env_vars_length = 10
+  env_vars_length = 14
 
   server_error_alarm_topic_arn = "${module.alb_server_error_alarm.arn}"
   client_error_alarm_topic_arn = "${module.alb_client_error_alarm.arn}"
