@@ -24,3 +24,4 @@ variable "workflow_domain_name" {
 
 variable "goobi_docker_uri" {}
 variable "proxy_docker_uri" {}
+variable "docker_repo" {}

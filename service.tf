@@ -5,8 +5,8 @@ module "ecs_service" {
   cluster_id = "${module.ecs_cluster.cluster_name}"
   vpc_id     = "${module.network.vpc_id}"
 
-  nginx_uri                = "${var.proxy_docker_uri}"
-  app_uri                  = "${var.goobi_docker_uri}"
+  nginx_uri                = "${var.docker_repo}/httpd_proxy:itm_latest"
+  app_uri                  = "${var.docker_repo}"
   primary_container_port   = "80"
   secondary_container_port = "8080"
 
@@ -48,4 +48,6 @@ module "ecs_service" {
 
   log_group_name_prefix = "goobi"
   log_retention_in_days = 60
+
+  task_definition_template_path = "./task-definition.json.template"
 }
