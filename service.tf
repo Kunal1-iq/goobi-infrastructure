@@ -1,5 +1,5 @@
 module "ecs_service" {
-  source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/service?ref=v9.1.0"
+  source = "git::https://github.com/wellcometrust/terraform-modules.git//ecs/service?ref=v10.3.1"
   name   = "goobi"
 
   cluster_id = "${module.ecs_cluster.cluster_name}"
@@ -40,8 +40,6 @@ module "ecs_service" {
 
   https_domain = "${var.workflow_domain_name}"
   path_pattern = "/*"
-
-  env_vars_length = 14
 
   server_error_alarm_topic_arn = "${module.alb_server_error_alarm.arn}"
   client_error_alarm_topic_arn = "${module.alb_client_error_alarm.arn}"
