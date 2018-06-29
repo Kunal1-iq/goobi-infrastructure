@@ -10,9 +10,9 @@ module "ecs_service" {
   primary_container_port   = "80"
   secondary_container_port = "8080"
 
-  volume_name      = "goobi_metadata"
-  volume_host_path = "/mnt/efs/digiverso/goobi/metadata"
-  container_path   = "/opt/digiverso/goobi/metadata/"
+  volume_name      = "digiverso"
+  volume_host_path = "/mnt/efs/digiverso/"
+  container_path   = "/efs/digiverso/"
 
   loadbalancer_cloudwatch_id = "${module.ecs_cluster.alb_cloudwatch_id}"
 
