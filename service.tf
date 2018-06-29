@@ -34,6 +34,7 @@ module "ecs_service" {
     DB_NAME       = "${module.goobi_rds_cluster.database_name}"
     DB_USER       = "${module.goobi_rds_cluster.username}"
     DB_PASSWORD   = "${module.goobi_rds_cluster.password}"
+    ITM_DB_NAME   = "itm"
     CONFIGSOURCE  = "s3"
     AWS_S3_BUCKET = "${aws_s3_bucket.workflow-configuration.bucket}"
   }
