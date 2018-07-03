@@ -52,8 +52,29 @@
   {
     "cpu": ${cpu},
     "essential": true,
+    "image": "${app_uri}/shellserver",
+    "memory": 512,
+    "name": "shellserver",
+    "environment": ${environment_vars},
+    "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+            "awslogs-group": "${log_group_name}",
+            "awslogs-region": "${log_group_region}"
+        }
+    },
+    "mountPoints": [
+      {
+        "sourceVolume": "${volume_name}",
+        "containerPath": "${container_path}"
+      }
+    ]
+  },
+  {
+    "cpu": ${cpu},
+    "essential": true,
     "image": "${app_uri}/itm",
-    "memory": 1024,
+    "memory": 768,
     "name": "itm",
     "environment": ${environment_vars},
     "portMappings": [
