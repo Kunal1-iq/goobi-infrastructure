@@ -86,6 +86,12 @@ resource "aws_iam_role_policy" "ecs_shell_server_1_s3_editorial_photography_uplo
   policy = data.aws_iam_policy_document.s3_editorial_photography_upload_external.json
 }
 
+# cron
+resource "aws_iam_role_policy" "ecs_cron_s3_config_read" {
+  role   = module.cronservice.task_role
+  policy = data.aws_iam_policy_document.s3_read_workflow-configuration.json
+}
+
 resource "aws_iam_role_policy" "lambda_s3_upload_rw" {
   name   = "lambda_s3_upload"
   role   = aws_iam_role.lambda_stage_iam_role.name

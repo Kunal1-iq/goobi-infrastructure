@@ -142,3 +142,4 @@ variable "storage_archive_bucket" {
   default = "wellcomecollection-storage-archive"
 }
 
+variable "cron_container_image" {}
