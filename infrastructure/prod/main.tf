@@ -394,3 +394,44 @@ module "shell_server_4" {
   shell_server_deployment_minimum_healthy_percent = "0"
   shell_server_deployment_maximum_percent         = "100"
 }
+
+module "cronservice" {
+  source = "../modules/goobi/private_service"
+
+  name = "workflow-cron"
+
+  vpc_id          = module.network.vpc_id
+  private_subnets = module.network.private_subnets
+
+  namespace_id = module.goobi.goobi_namespace_id
+
+  ebs_host_path = module.goobi.goobi_ebs_host_path
+  efs_host_path = module.goobi.goobi_efs_host_path
+
+  efs_container_path = "/efs"
+  ebs_container_path = "/ebs"
+
+  container_port = 80
+
+  service_egress_security_group_id = aws_security_group.service_egress.id
+  interservice_security_group_id   = aws_security_group.interservice.id
+
+  container_image = var.cron_container_image
+
+  cluster_id = module.goobi.goobi_cluster_id
+  region     = var.region
+
+  env_vars = {
+    CONFIGSOURCE  = "s3"
+    AWS_S3_BUCKET = aws_s3_bucket.workflow-configuration.bucket
+    TZ            = "Europe/London"
+  }
+
+  env_vars_length = 3
+
+  cpu    = 128
+  memory = 256
+
+  deployment_minimum_healthy_percent = 0
+  deployment_maximum_percent         = 100
+}
